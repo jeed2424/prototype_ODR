@@ -61,17 +61,6 @@
                                             <action selector="ImportFiles:" destination="BYZ-38-t0r" id="132-4Y-O1C"/>
                                         </connections>
                                     </barButtonItem>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="lvh-FS-P4g"/>
-                                    <barButtonItem systemItem="refresh" id="dFO-b9-qFt">
-                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <connections>
-                                            <action selector="refresh:" destination="BYZ-38-t0r" id="PV1-wY-U7U"/>
-                                        </connections>
-                                    </barButtonItem>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="hqO-zW-GlE"/>
-                                    <barButtonItem systemItem="edit" id="rDZ-XS-e8J">
-                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </barButtonItem>
                                 </items>
                                 <color key="barTintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </toolbar>
@@ -101,7 +90,7 @@
         <!--New View Controller-->
         <scene sceneID="Byf-Ed-JNm">
             <objects>
-                <viewController id="RHC-CP-2nU" customClass="NewViewController" customModule="OpenDocument" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="NewViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="RHC-CP-2nU" customClass="NewViewController" customModule="OpenDocument" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="tgh-cr-4P0">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

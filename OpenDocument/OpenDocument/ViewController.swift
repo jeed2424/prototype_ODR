@@ -10,22 +10,18 @@ import UIKit
 import MobileCoreServices
 import Foundation
 
-class ViewController: UIViewController, UITableViewDataSource {
+class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     
-    var importedfiles: NSArray! = NSArray()
+    var importedfiles: Array<Any> = Array()
     let FM = FileManager.default
 
     
     
     @IBOutlet weak var tableView: UITableView!
     
-    @IBAction func refresh(_ sender: UIBarButtonItem) {
-        
-        
-    }
     
-    @IBAction func ImportFiles(_ sender: UIBarButtonItem) {
+        @IBAction func ImportFiles(_ sender: UIBarButtonItem) {
         
         let documentPicker = UIDocumentPickerViewController(documentTypes: ["public.data"], in: .import)
         documentPicker.delegate = self as UIDocumentPickerDelegate
@@ -35,18 +31,55 @@ class ViewController: UIViewController, UITableViewDataSource {
     }
     
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    
+    
+        override func viewDidLoad() {
+            super.viewDidLoad()
         // Do any additional setup after loading the view.
+        self.loadFiles()
+        
+    }
+    
+    func loadFiles() {
         let dirPaths = FM.urls(for: .documentDirectory, in: .userDomainMask)
         let docsDir = dirPaths[0].path
         let importedfiles = try! FM.contentsOfDirectory(atPath: docsDir)
         
-            
-        self.importedfiles! = importedfiles as NSArray
-        
+        tableView.dataSource = self
+        tableView.delegate = self
+        self.importedfiles = importedfiles as Array
     }
 
+    
+    func deleteFile(filetodelete: String) {
+        let dirPaths = FM.urls(for: .documentDirectory, in: .userDomainMask)
+        let docsDir = dirPaths[0].appendingPathComponent(filetodelete).path
+        if FM.fileExists(atPath: docsDir) {
+            do {
+                try FM.removeItem(atPath: docsDir)
+                print ("File deleted")
+            } catch {
+                print ("Could not delete file: \(error)")
+            }
+        }
+    }
+    
+    func OpenFile(fileToLoad: String) {
+        let SecondScreen = self.storyboard?.instantiateViewController(withIdentifier: "NewViewController") as! NewViewController
+        let dirPaths = FM.urls(for: .documentDirectory, in: .userDomainMask)
+        let docsDir = dirPaths[0].appendingPathComponent(fileToLoad).path
+        if FM.fileExists(atPath: docsDir) {
+            do {
+                SecondScreen.ViewFile(filePath: fileToLoad)
+                self.present(SecondScreen, animated: true, completion: nil)
+                print ("Will open file")
+            }
+        }
+       
+    }
+        
+    
+    
 
 func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
    
@@ -66,15 +99,25 @@ func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> U
  
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let file = self.importedfiles[indexPath.row]
-        // you'd create a new FileViewController class
-        let fileViewController = NewViewController(coder: file as! NSCoder)!
-        // show the fileViewController however you want
-        show(fileViewController, sender: self)
+        let fileToLoad = self.importedfiles[indexPath.row]
+        self.OpenFile(fileToLoad: fileToLoad as! String)
         
+        print ("Cell \(indexPath.row) is selected")
     }
     
-}
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == UITableViewCell.EditingStyle.delete {
+         let filetodelete = self.importedfiles[indexPath.row]
+            self.deleteFile(filetodelete: filetodelete as! String)
+            importedfiles.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: UITableView.RowAnimation.automatic)
+            
+        }
+    
+  }
+ }
+
+
         
 
 extension ViewController: UIDocumentPickerDelegate{
@@ -93,6 +136,8 @@ extension ViewController: UIDocumentPickerDelegate{
             do{
                 try FM.copyItem(at: selectedFileUrl, to: sandboxFileUrl)
                 print ("Copied document!")
+                self.loadFiles()
+                self.tableView.reloadData()
                
             }
             catch {
@@ -100,5 +145,10 @@ extension ViewController: UIDocumentPickerDelegate{
             }
         }
     }
+    
 }
+
+
+
+
 
