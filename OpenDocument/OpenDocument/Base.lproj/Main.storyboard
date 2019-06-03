@@ -114,7 +114,7 @@
                         <viewLayoutGuide key="safeArea" id="hvU-WZ-12H"/>
                     </view>
                     <connections>
-                        <outlet property="FileToLoad" destination="nAk-oC-89l" id="XcL-U4-Zj5"/>
+                        <outlet property="webView" destination="nAk-oC-89l" id="XcL-U4-Zj5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="m2A-bq-0mX" userLabel="First Responder" sceneMemberID="firstResponder"/>

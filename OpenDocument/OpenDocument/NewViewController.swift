@@ -10,25 +10,25 @@ import UIKit
 import WebKit
 import MobileCoreServices
 
-class NewViewController: UIViewController, WKUIDelegate {
-    
-    
-    func ViewFile(filePath: String) {
-        let url = URL.init(fileURLWithPath: filePath)
-       
-        let request = URLRequest(url: url)
-        FileToLoad.load(request)
-    }
+class NewViewController: UIViewController {
     
 
     
-    @IBOutlet weak var FileToLoad: WKWebView!
+    @IBOutlet var webView: WKWebView!
+    var fileToLoad: URL?
     
-    
+    override func loadView() {
+        webView = WKWebView()
+        self.view = webView
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        guard let url = fileToLoad else { return }
+        let request = URLRequest(url: url)
+        webView.load(request)
+        
         // Do any additional setup after loading the view.
     }
     

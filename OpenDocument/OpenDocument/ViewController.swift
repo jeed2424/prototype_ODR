@@ -64,18 +64,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
     }
     
+    
     func OpenFile(fileToLoad: String) {
         let SecondScreen = self.storyboard?.instantiateViewController(withIdentifier: "NewViewController") as! NewViewController
         let dirPaths = FM.urls(for: .documentDirectory, in: .userDomainMask)
-        let docsDir = dirPaths[0].appendingPathComponent(fileToLoad).path
-        if FM.fileExists(atPath: docsDir) {
-            do {
-                SecondScreen.ViewFile(filePath: fileToLoad)
-                self.present(SecondScreen, animated: true, completion: nil)
-                print ("Will open file")
-            }
-        }
-       
+        let docsDir = dirPaths[0].appendingPathComponent(fileToLoad)
+        SecondScreen.fileToLoad = docsDir
+        self.present(SecondScreen, animated: true, completion: nil)
+        
     }
         
     
