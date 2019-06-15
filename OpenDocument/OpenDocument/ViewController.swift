@@ -70,7 +70,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         let dirPaths = FM.urls(for: .documentDirectory, in: .userDomainMask)
         let docsDir = dirPaths[0].appendingPathComponent(fileToLoad)
         SecondScreen.fileToLoad = docsDir
-        self.present(SecondScreen, animated: true, completion: nil)
+        navigationController?.pushViewController(SecondScreen, animated: true)
         
     }
         

@@ -26,8 +26,9 @@ class NewViewController: UIViewController {
         super.viewDidLoad()
         
         guard let url = fileToLoad else { return }
-        let request = URLRequest(url: url)
-        webView.load(request)
+        let contents = try! String(contentsOf: url, encoding: .utf8)
+        print(contents)
+        webView.loadHTMLString(contents, baseURL: nil)
         
         // Do any additional setup after loading the view.
     }

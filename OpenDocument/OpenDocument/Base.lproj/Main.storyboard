@@ -106,10 +106,10 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="nAk-oC-89l" firstAttribute="leading" secondItem="tgh-cr-4P0" secondAttribute="leading" id="4jQ-Zq-1dD"/>
-                            <constraint firstItem="nAk-oC-89l" firstAttribute="top" secondItem="hvU-WZ-12H" secondAttribute="top" id="AZq-Oz-2to"/>
-                            <constraint firstAttribute="trailing" secondItem="nAk-oC-89l" secondAttribute="trailing" id="cOd-Sq-FrQ"/>
-                            <constraint firstItem="nAk-oC-89l" firstAttribute="bottom" secondItem="hvU-WZ-12H" secondAttribute="bottom" id="dRl-20-wTp"/>
+                            <constraint firstItem="nAk-oC-89l" firstAttribute="top" secondItem="hvU-WZ-12H" secondAttribute="top" id="7oU-b2-Dw2"/>
+                            <constraint firstAttribute="trailing" secondItem="nAk-oC-89l" secondAttribute="trailing" id="AaM-zA-jdh"/>
+                            <constraint firstItem="nAk-oC-89l" firstAttribute="bottom" secondItem="hvU-WZ-12H" secondAttribute="bottom" id="FbQ-4V-aBx"/>
+                            <constraint firstItem="nAk-oC-89l" firstAttribute="leading" secondItem="tgh-cr-4P0" secondAttribute="leading" id="ZqY-1d-OW7"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="hvU-WZ-12H"/>
                     </view>
